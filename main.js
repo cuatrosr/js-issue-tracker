@@ -60,9 +60,36 @@ function setStatusClosed(id) {
       issues[i].status = "Closed";
     }
   }
-
   localStorage.setItem('issues', JSON.stringify(issues));
+  fetchIssues();
+}
 
+function deleteIssue(id) {
+  swal({
+    title: 'Are you sure you want to delete this issue?',
+    text: 'You will not be able to recover this issue.',
+    type: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#DD6B55',
+    confirmButtonText: 'Yes!',
+    cancelButtonText: 'No.'
+  }).then((result) => {
+    if (result.value) {
+      deletion(id)
+    } else {
+      result.dismiss
+    }
+  })
+}
+
+function deletion(id) {
+  var issues = getIssues()
+  for (var i = 0; i < issues.length; i++) {
+    if (issues[i].id == id) {
+      issues.splice(i, 1);
+    }
+  }
+  localStorage.setItem('issues', JSON.stringify(issues));
   fetchIssues();
 }
 
