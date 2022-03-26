@@ -40,11 +40,12 @@ function fetchIssues() {
     card.innerHTML += 
     `
     <div class="shadow-lg p-3 mb-5 bg-body rounded">
-    <h4>${id}</h4>
+    <h4 class="ms-2 mb-2">${id}</h4>
     <span class="mb-3 mt-2 text-uppercase fs-6 badge rounded-pill bg-${badgeType(status)}"></span>
     <p class="ms-3 fw-lighter">Severty:  ${severity}</p>
     <p class="ms-3 fw-lighter">Assigned to: ${assignedTo}</p>
     <div class="alert alert-warning">Description: ${description}</div>
+    <a href="#" class="btn btn-danger" onclick="setStatusClosed(\''id'\')">Close</a> 
     </div>
     `
   })
