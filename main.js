@@ -44,8 +44,9 @@ function fetchIssues() {
     <span class="mb-3 mt-2 ms-2 text-uppercase fs-6 badge rounded-pill bg-${badgeType(status)}">${status}</span>
     <p class="ms-3 fw-lighter">Severty:  ${severity}</p>
     <p class="ms-3 fw-lighter">Assigned to: ${assignedTo}</p>
-    <div class="alert alert-warning">Description: ${description}</div>
-    <a class="btn btn-danger" onclick='setStatusClosed(\``+ id + `\`)'>Close</a> 
+    <div class="alert alert-success">Description: ${description}</div>
+    <a class="btn btn-warning" onclick='setStatusClosed(\``+ id + `\`)'>Close</a> 
+    <a href="#" class="btn btn-danger" onclick="deleteIssue(\``+ id + `\`)">Delete</a>
     </div>
     `
   })
