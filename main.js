@@ -41,11 +41,11 @@ function fetchIssues() {
       `
     <div class="shadow-lg p-3 mb-5 bg-body rounded">
     <h4 class="ms-2 mb-2">${id}</h4>
-    <span class="mb-3 mt-2 ms-2 text-uppercase fs-6 badge rounded-pill bg-${badgeType(status)}">${status}</span>
+    <span class="mb-3 mt-2 ms-2 text-uppercase fs-6 badge rounded-pill bg-${badgeType(status)[0]}">${status}</span>
     <p class="ms-3 fw-lighter">Severty:  ${severity}</p>
     <p class="ms-3 fw-lighter">Assigned to: ${assignedTo}</p>
     <div class="alert alert-success">Description: ${description}</div>
-    <a class="btn btn-warning" onclick='setStatusClosed(\``+ id + `\`)'>Close</a> 
+    <a class="btn btn-warning ${badgeType(status)[1]}" onclick='setStatusClosed(\``+ id + `\`)'>Close</a> 
     <a href="#" class="btn btn-danger" onclick="deleteIssue(\``+ id + `\`)">Delete</a>
     </div>
     `
@@ -115,13 +115,13 @@ function removeAllChildNodes(parent) {
 }
 
 function badgeType(status) {
-  var type = ''
+  var type = []
   switch (status) {
     case 'Open':
-      type = 'success'
+      type.push('success','')
       break;
     case 'Closed':
-      type = 'danger'
+      type.push('danger', 'disabled')
       break;
     default:
       type = 'warning'
