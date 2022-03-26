@@ -35,34 +35,20 @@ const fetch = () => {
 function fetchIssues() {
   var container = document.getElementById('issuesList')
   removeAllChildNodes(container)
-  getIssues().map(({ id, description, severity, assignedTo, status }) => {
-
-    //Renders
-    var idRender = document.createElement("h4")
-    var descriptionRender = document.createElement("div")
-    var severityRender = document.createElement("p")
-    var assignedToRender = document.createElement("p")
-    var statusRender = document.createElement("span")
-
-    //Styles
-    descriptionRender.className += "alert alert-warning"
-    statusRender.className += "mb-3 mt-2 text-uppercase fs-6 badge rounded-pill bg-" + badgeType(status)
-    severityRender.className += "ms-3 fw-lighter"
-    assignedToRender.className += "ms-3 fw-lighter"
-
-    //Adding Info
-    idRender.innerHTML = id
-    descriptionRender.innerHTML = "Description: " + description
-    severityRender.innerHTML = "Severty: " + severity
-    assignedToRender.innerHTML = "Assigned to: " + assignedTo
-    statusRender.innerHTML = status
-
-    //Pushing to template
-    var card = document.createElement("div")
-    card.className += "shadow-lg p-3 mb-5 bg-body rounded"
-    card.append(idRender, statusRender, assignedToRender, severityRender, descriptionRender)
-    container.appendChild(card)
+  var card = document.createElement("div")
+  getIssues().map(({ id, description, severity, assignedTo, status})=>{
+    card.innerHTML += 
+    `
+    <div class="shadow-lg p-3 mb-5 bg-body rounded">
+    <h4>${id}</h4>
+    <span class="mb-3 mt-2 text-uppercase fs-6 badge rounded-pill bg-${badgeType(status)}"></span>
+    <p class="ms-3 fw-lighter">Severty:  ${severity}</p>
+    <p class="ms-3 fw-lighter">Assigned to: ${assignedTo}</p>
+    <div class="alert alert-warning">Description: ${description}</div>
+    </div>
+    `
   })
+  container.appendChild(card)
 }
 
 //Aux
