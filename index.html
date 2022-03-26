@@ -12,9 +12,9 @@
     <title>Document</title>
 </head>
 
-<body>
+<body onload="fetch()">
     <div class="container">
-        <h1>Issue Tracker</h1>
+        <h1 class="my-4">Issue Tracker</h1>
         <div class="jumbotron">
             <h3>Add New Issue:</h3>
             <form id="issueInputForm">
@@ -31,13 +31,11 @@
                 <button type="submit" class="btn btn-primary">Add</button>
             </form>
         </div>
-        <div class="continer mb-4" id="issues">
-            <h1 class="mb-2">Issue List</h1>
-        </div>
+        <h1 class="mb-4">Issue List</h1>
+        <div class="continer mb-4" id="issuesList"></div>
         <div class="footer">
             <p>Taller en Clase de Proyecto Integrador I - 2022</p>
         </div>
-
     </div>
     <script src="main.js"></script>
 </body>

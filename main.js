@@ -26,13 +26,15 @@ function saveIssue(e) {
 }
 
 const fetch = () => {
+  //clearStorage()
   if (getIssues() != null) {
     fetchIssues()
   }
 }
 
 function fetchIssues() {
-  var container = document.getElementById('issues')
+  var container = document.getElementById('issuesList')
+  removeAllChildNodes(container)
   getIssues().map(({ id, description, severity, assignedTo, status }) => {
 
     //Renders
@@ -58,7 +60,7 @@ function fetchIssues() {
     //Pushing to template
     var card = document.createElement("div")
     card.className += "shadow-lg p-3 mb-5 bg-body rounded"
-    card.append(idRender, statusRender, assignedToRender,severityRender,descriptionRender)
+    card.append(idRender, statusRender, assignedToRender, severityRender, descriptionRender)
     container.appendChild(card)
   })
 }
@@ -74,8 +76,14 @@ function setIssue(issue) {
   localStorage.setItem('issues', JSON.stringify(issues));
 }
 
-function clearStorage(){
+function clearStorage() {
   localStorage.clear()
+}
+
+function removeAllChildNodes(parent) {
+  while (parent.firstChild) {
+    parent.removeChild(parent.firstChild);
+  }
 }
 
 function badgeType(status) {
@@ -95,4 +103,3 @@ function badgeType(status) {
 }
 
 document.getElementById('issueInputForm').addEventListener('submit', saveIssue);
-window.addEventListener('load', fetch);
