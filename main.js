@@ -36,20 +36,33 @@ function fetchIssues() {
   var container = document.getElementById('issuesList')
   removeAllChildNodes(container)
   var card = document.createElement("div")
-  getIssues().map(({ id, description, severity, assignedTo, status})=>{
-    card.innerHTML += 
-    `
+  getIssues().map(({ id, description, severity, assignedTo, status }) => {
+    card.innerHTML +=
+      `
     <div class="shadow-lg p-3 mb-5 bg-body rounded">
     <h4 class="ms-2 mb-2">${id}</h4>
-    <span class="mb-3 mt-2 text-uppercase fs-6 badge rounded-pill bg-${badgeType(status)}"></span>
+    <span class="mb-3 mt-2 ms-2 text-uppercase fs-6 badge rounded-pill bg-${badgeType(status)}">${status}</span>
     <p class="ms-3 fw-lighter">Severty:  ${severity}</p>
     <p class="ms-3 fw-lighter">Assigned to: ${assignedTo}</p>
     <div class="alert alert-warning">Description: ${description}</div>
-    <a href="#" class="btn btn-danger" onclick="setStatusClosed(\''id'\')">Close</a> 
+    <a class="btn btn-danger" onclick='setStatusClosed(\``+ id + `\`)'>Close</a> 
     </div>
     `
   })
   container.appendChild(card)
+}
+
+function setStatusClosed(id) {
+  var issues = getIssues()
+  for (var i = 0; i < issues.length; i++) {
+    if (issues[i].id == id) {
+      issues[i].status = "Closed";
+    }
+  }
+
+  localStorage.setItem('issues', JSON.stringify(issues));
+
+  fetchIssues();
 }
 
 //Aux
